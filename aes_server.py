@@ -1,4 +1,10 @@
 #!/usr/bin/python
+
+__author__ = "Feng Gao gfree.wind@gmail.com"
+__copyright__ = "Copyright (C) 2015 Feng Gao"
+__license__ = "GPL"
+__version__ = "1.0"
+
 import sys, socket, select, json
 import getopt, base64, binascii
 import commands
