@@ -372,6 +372,4 @@ if __name__ == "__main__":
 		epoll.unregister(master_socket.fileno())
 		master_socket.close();
 
-	print "Dummy REST server exit"
-
 	
