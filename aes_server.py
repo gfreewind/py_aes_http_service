@@ -26,13 +26,14 @@ AES_PAD = lambda s: s + (AES_BLOCK_SIZE - len(s) % AES_BLOCK_SIZE) * chr(AES_BLO
 AES_UNPAD = lambda s : s[:-ord(s[len(s)-1:])]
 
 def ConstructErrorResponse(err):
-    err_header = "HTTP/1.1 400 " + err +" \r\nContent-Type: text/html\r\nContent-Length: 0\r\n\r\n"
-    return err_header
+	lenth_str = "Content-Length: "+str(len(err))+"\r\n\r\n"
+	err_header = "HTTP/1.1 400 \r\nContent-Type: text/html\r\n"+lenth_str+err
+	return err_header
 	
 def ConstructResponse(payload):
-    lenth_str = "Content-Length: "+str(len(payload))+"\r\n\r\n"
-    response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n"+lenth_str+payload
-    return response
+	lenth_str = "Content-Length: "+str(len(payload))+"\r\n\r\n"
+	response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n"+lenth_str+payload
+	return response
 
 class AESCipher:
 	def __init__(self, key, bs):
@@ -211,7 +212,7 @@ class HTTPClient():
 						json_data = json.loads(json_data)
 					except ValueError:
 						print "Invalid json data", json_data
-						
+				
 				# Get action
 				action = self.http_headers.get_param_value("action")
 				if ("enc" == action):
@@ -237,6 +238,8 @@ class HTTPClient():
 					else:
 						response = ConstructErrorResponse("No ciper param")
 				else:
+					if (DEBUG):
+						print "No supported operation"
 					response = ConstructErrorResponse("No supported aciton or no specify action")
 					
 				self.socket.send(response)
