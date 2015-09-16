@@ -6,7 +6,7 @@ The result is encoded by base64.
 [fgao@ubuntu py_aes_http_service]#./aes_server.py  -h  
 -h: Show the help  
 -l: Specify listen port  
--k: Specify AES key  
+-k: Specify AES key. Default is 1234567890abcdef
 -e: Specify AES encrypt mode. default is cbc  
 -s: Specify AES block size  
 -v: Specify AES IV. default is random string  
